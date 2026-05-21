@@ -207,7 +207,7 @@ class UserController {
 
         ajax.onload = event => {
 
-            let obj = { user: []};
+            let obj = {};
 
             try{
 
@@ -217,17 +217,16 @@ class UserController {
 
                 console.error(e);
 
-            }            
+            } 
+            
+            let listaDeUsuarios = Array.isArray(obj.users) ? obj.users : (Array.isArray(obj) ? obj : []);
 
-            obj.users.forEach(dataUser=>{
-
+            listaDeUsuarios.forEach(dataUser => {
                 let user = new User();
-
                 user.loadFromJSON(dataUser);
-
                 this.addLine(user);
-
             });
+
         };        
 
         ajax.send();
